@@ -10,8 +10,8 @@ You can dispatch your resources in well structured feature teams.
 cd server
 npm install
 nodemon index.js
-# npm install -g nodemon
 ```
+
 <h2>Instalation Front</h2>
 ```sh
 cd client
