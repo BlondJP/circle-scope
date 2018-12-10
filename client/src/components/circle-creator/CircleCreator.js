@@ -21,12 +21,22 @@ class CircleCreator extends Component {
     });
   }
 
+  openModal = () => {
+    return (
+      <div class="modal">
+        <div class="modal-background"></div>
+          <div class="modal-content">
+              my modal
+          </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+      </div>
+    )
+  }
+
   render() {
     return (
       <div className='Circle Creator'>
-        <form onSubmit={this.handleSubmit}>
-          <input onChange={this.handleChange} type="text" value={this.state.circleName} placeholder='Nom du futur cercle'/>
-        </form>
+        <button className="button is-primary" onClick={this.openModal}>Add New Circle</button>
       </div>
     )
   }
