@@ -59,7 +59,7 @@ class Calculator extends Component {
 
   render() {
     const taxes = this.calculateTaxes(this.state.earnings);
-    const generalTaxation = taxes / (this.state.earnings|1) * 100
+    const generalTaxation = Math.round(taxes / (this.state.earnings|1) * 100)
     console.log(taxes)
 
     return (
