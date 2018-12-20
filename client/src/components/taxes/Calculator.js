@@ -4,7 +4,7 @@ class Calculator extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {earnings: 0};
+    this.state = {earnings: 0, taxRebate: 0};
   }
 
   handleEarningChange = (e) => {
@@ -19,9 +19,19 @@ class Calculator extends Component {
     });
   }
 
+  handleTaxRebateChange = (e) => {
+    this.setState({
+      taxRebate: e.target.value
+    });
+  }
+
   calculateTaxes = (earnings) => {
 
-    if (earnings < 0) {
+    let earningsToTax = earnings - (earnings * (this.state.taxRebate/100));
+
+    //console.log(earningsToTax, )
+
+    if (earningsToTax < 0) {
       return 0
     }
 
@@ -38,20 +48,18 @@ class Calculator extends Component {
     bearings.forEach(bearing => {
       let moneyToEval;
 
-      if (earnings > bearing.max) {
+      if (earningsToTax > bearing.max) {
         moneyToEval = bearing.max
       } else {
-        moneyToEval = earnings
+        moneyToEval = earningsToTax
       }
 
       if (moneyToEval > 0) {
         taxes += (moneyToEval * bearing.taxation / 100)
       }
 
-      earnings -= moneyToEval;
+      earningsToTax -= moneyToEval;
     });
-
-
 
     return taxes;
   }
@@ -69,17 +77,19 @@ class Calculator extends Component {
         <div className="notification">
         <div className='IR Calculator'>
 
-
-
           <form>
-            <label className="label">Revenu Annuel Net</label>
-            <input className="input is-primary" label="Annuel Net" type="number" placeholder="Revenus Net Annuel" value={this.state.earnings} onChange={this.handleEarningChange}/>
+            <label className="label">Revenus Annuel Net(€)</label>
+            <input className="input is-primary" label="Revenus Annuel Net(€)" type="number" placeholder="Revenus Annuel Net(€)" value={this.state.earnings} onChange={this.handleEarningChange}/>
 
-            <label className="label">Revenu Mensuel Net</label>
-            <input className="input is-primary" label="Mensuel Net" type="number" placeholder="Revenus Net Annuel" value={this.state.earnings / 12} onChange={this.handleMonthlyEarningChange}/>
+            <label className="label">Revenus Mensuel Net(€)</label>
+            <input className="input is-primary" label="Revenus Mensuel Net(€)" type="number" placeholder="Revenus Mensuel Net(€)" value={this.state.earnings / 12} onChange={this.handleMonthlyEarningChange}/>
+
+            <label className="label">Abattement Fiscal(%)</label>
+            <input className="input is-primary" label="Abattement Fiscal(%)" type="number" placeholder="Abattement Fiscal(%)" value={this.state.taxRebate} onChange={this.handleTaxRebateChange}/>
+
           </form><br />
 
-          <h2>{taxes} € d'IR à payer.</h2><br />
+          <h2><b>{taxes} €</b> d'IR à payer.</h2><br />
           <h2>Votre taux d'imposition est de {generalTaxation} %</h2>
         </div>
         </div>
