@@ -22,14 +22,11 @@ class Scope extends Component {
 
   addCircle = (circleName) => {
     let circle = {id:(this.state.circles.length + 1), name: circleName, members: []};
-    console.log(circle)
     this.setState({circles : [...this.state.circles, circle]});
-    console.log(this.state.circles)
   }
 
   render() {
     const circleList = this.state.circles.map((circle) => <Circle key={circle.id} circle={circle} color={this.getNextColor()}/>)
-
     return (
       <div className="App universe">
         <CircleCreator addCircle={this.addCircle}/>

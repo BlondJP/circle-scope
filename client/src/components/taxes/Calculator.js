@@ -29,8 +29,6 @@ class Calculator extends Component {
 
     let earningsToTax = earnings - (earnings * (this.state.taxRebate/100));
 
-    //console.log(earningsToTax, )
-
     if (earningsToTax < 0) {
       return 0
     }
@@ -72,7 +70,7 @@ class Calculator extends Component {
 
     return (
       <div className="container">
-        <h1>Estimation de l'IR</h1><br />
+        <h1 class="title is-3">Estimation de l'IR</h1>
 
         <div className="notification">
         <div className='IR Calculator'>
